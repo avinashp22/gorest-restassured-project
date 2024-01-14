@@ -26,6 +26,20 @@ public class UserExtractionTest {
     }
 
 
+//1. Extract the All Ids
+//2. Extract the all Names
+//3. Extract the name of 5th object
+//4. Extract the names of all object whose status = inactive
+//5. Extract the gender of all the object whose status = active
+//6. Print the names of the object whose gender = female
+//7. Get all the emails of the object where status = inactive
+//8. Get the ids of the object where gender = male
+//9. Get all the status
+//10. Get email of the object where name = Lal Dwivedi
+//11. Get gender of id = 5914189
+
+
+
     // 1) Extract the value of limit
     @Test
     public void test001() {

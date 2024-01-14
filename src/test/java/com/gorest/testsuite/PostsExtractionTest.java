@@ -25,6 +25,14 @@ public class PostsExtractionTest {
                 .then().statusCode(200);
     }
 
+//1. Extract the title
+//2. Extract the total number of record
+//3. Extract the body of 15th record
+//4. Extract the user_id of all the records
+//5. Extract the title of all the records
+//6. Extract the title of all records whose user_id = 5914200
+//7. Extract the body of all records whose id = 93957
+
 
     // 1) Extract the value of limit
     @Test

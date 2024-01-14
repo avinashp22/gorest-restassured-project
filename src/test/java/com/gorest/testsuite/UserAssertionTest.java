@@ -24,6 +24,15 @@ public class UserAssertionTest {
     }
 
 
+//1. Verify the if the total record is 20
+//2. Verify the if the name of id = 5914197 is equal to ”Bhilangana Dhawan”
+//3. Check the single ‘Name’ in the Array list (Dev Bhattacharya)
+//4. Check the multiple ‘Names’ in the ArrayList (Usha Kaul Esq., Akshita Mishra, Chetanaanand Reddy )
+//5. Verify the emai of userid = 5914185 is equal “tandon_iv_aanandinii@prosacco.example”
+//6. Verify the status is “Active” of user name is “Amaresh Rana”
+//7. Verify the Gender = male of user name is “Dhanalakshmi Pothuvaal”
+
+
     // 1) Verify that the products of limit is equal to 10
     @Test
     public void test001() {

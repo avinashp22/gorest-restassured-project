@@ -23,6 +23,12 @@ public class PostsAssertionTest {
                 .then().statusCode(200);
     }
 
+//1. Verify the if the total record is 25
+//2. Verify the if the title of id = 93997 is equal to ”Demitto conqueror atavus argumentum corrupticohaero libero.”
+//3. Check the single user_id in the Array list (5914249)
+//4. Check the multiple ids in the ArrayList (5914243, 5914202, 5914199)
+//5. Verify the body of userid = 5914197 is equal “Desidero vorax adsum. Non confero clarus. Velut defessus acceptus. Alioqui dignissimos alter. Tracto vel sordeo. Vulpes curso tollo. Villa ususvos. Terreo vos curtus. Condico correptius praesentium. Curatio deripio attero. Tempus creptiotumultus. Adhuc consequatur undique. Adaugeo terminatio antiquus. Stultus ex temptatio. Autusacerbitas civitas. Comptus terminatio tertius. Utpote fugit voluptas. Sequi adulescens caecus.”
+
 
     // 1) Verify that the products of limit is equal to 10
     @Test

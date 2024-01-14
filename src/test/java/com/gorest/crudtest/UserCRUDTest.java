@@ -21,8 +21,22 @@ public class UserCRUDTest extends TestBase {
     static String lastName = TestUtils.getRandomValue() + "PrimeUser";
     static String programme = "Api Testing";
     static String email = TestUtils.getRandomValue() + "xyz@gmail.com";
-
     static int studentId;
+
+
+
+
+    @Test
+    public void verifyUserCreatedSuccessfully() {}
+
+    @Test
+    public void verifyUserUpdateSuccessfully() {}
+
+    @Test
+    public void VerifyUserDeleteSuccessfully() {}
+
+
+
 
 
     @Test
