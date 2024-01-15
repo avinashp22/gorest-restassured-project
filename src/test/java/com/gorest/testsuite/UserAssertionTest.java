@@ -39,10 +39,7 @@ public class UserAssertionTest {
     //1.Verify the if the total record is 20
     @Test
     public void test001() {
-        response = given()
-                .when()
-                .get("/users?page=1&per_page=20")
-                .then().statusCode(200);
+
         List<Integer> total = response.extract().path("id");
         Assert.assertEquals(total.size(), 20);
     }
