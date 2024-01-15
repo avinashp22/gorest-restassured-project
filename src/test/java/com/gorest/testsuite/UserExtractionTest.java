@@ -5,7 +5,6 @@ import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
@@ -39,128 +38,113 @@ public class UserExtractionTest {
 //11. Get gender of id = 5914189
 
 
-
-    // 1) Extract the value of limit
+    //1. Extract the All Ids
     @Test
     public void test001() {
-
-        int limit = response.extract().path("limit");
+        List<Integer> userIds = response.extract().path("id");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + limit);
+        System.out.println("The value of limit is : " + userIds );
         System.out.println("------------------End of Test---------------------------");
-
     }
 
-    // 2) Extract the list of IDs of all products
+    //2. Extract the all Names
     @Test
     public void test002() {
-
-        List<Integer> listOfIds = response.extract().path("data.id");
+        List<String> allName = response.extract().path("name");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("List of Ids are : " + listOfIds);
+        System.out.println("The value of limit is : " + allName );
         System.out.println("------------------End of Test---------------------------");
-
     }
 
-    // 3) Extract first product name from data by providing list index value
+    //3. Extract the name of 5th object
     @Test
     public void test003() {
-        String productName = response.extract().path("data[0].name");
+        String name = response.extract().path("[4].name");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The first product name is : " + productName);
+        System.out.println("The value of limit is : " + name );
         System.out.println("------------------End of Test---------------------------");
     }
 
-    // 4) Get the categories list of the first data
+    //4. Extract the names of all object whose status = inactive
     @Test
     public void test004() {
-        // Homework
+        List<String> status = response.extract().path("findAll{it.status == 'inactive'}.name");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The Categories list are : ");
+        System.out.println("The value of limit is : " + status );
         System.out.println("------------------End of Test---------------------------");
-
     }
 
-    // 5)Print the size of data
+    //5. Extract the gender of all the object whose status = active
     @Test
     public void test005() {
-        //Homework
+        List<String> activeGender = response.extract().path("findAll{it.status == 'active'}.gender");
+
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The size of the data is : ");
+        System.out.println("The value of limit is : " + activeGender );
         System.out.println("------------------End of Test---------------------------");
     }
 
-    // 6) Get All the products Name from data
+    //6. Print the names of the object whose gender = female
     @Test
     public void test006() {
-        //Homework  (data.name)
+        List<String> femaleGender = response.extract().path("findAll{it.gender == 'female'}.name");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The names of the products are : ");
+        System.out.println("The value of limit is : " + femaleGender );
         System.out.println("------------------End of Test---------------------------");
     }
 
-    // 7) Get all the values for Name == Duracell - AA Batteries (8-Pack)
+    //7. Get all the emails of the object where status = inactive
     @Test
     public void test007() {
-        List<HashMap<String, ?>> values = response.extract().path("data.findAll{it.name == 'Duracell - AA Batteries (8-Pack)'}");
+        List<String> email = response.extract().path("findAll{it.status == 'inactive'}.email");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The values for product name 'Duracell - AA Batteries (8-Pack)' are: " + values);
+        System.out.println("The value of limit is : " + email );
         System.out.println("------------------End of Test---------------------------");
     }
 
-    // 8) Get the price for product Name == Duracell - D Batteries (4-Pack)
+    //8. Get the ids of the object where gender = male
     @Test
     public void test008() {
-        List<Double> price = response.extract().path("data.findAll{it.name == 'Duracell - D Batteries (4-Pack)'}.price");
+        List<String> ids = response.extract().path("findAll{it.gender == 'male'}.id");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The price of product name 'Duracell - D Batteries (4-Pack)' is : " + price);
+        System.out.println("The value of limit is : " + ids );
         System.out.println("------------------End of Test---------------------------");
     }
 
-    // 9) Get the Names of products which have price less than 16.99
+    //9. Get all the status
     @Test
     public void test009() {
-        List<String> productsName = response.extract().path("data.findAll{it.price < 16.99}.name");
+        List<String> status = response.extract().path("status");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The names of products that price is less than 16.99 are: " + productsName);
+        System.out.println("The value of limit is : " + status );
         System.out.println("------------------End of Test---------------------------");
     }
 
-    // 10) Get the manufacturer of products whose name Start = Ene
+    //10. Get email of the object where name = Lal Dwivedi
     @Test
     public void test010() {
-        List<?> menuList = response.extract().path("data.findAll{it.name.startsWith('Ene')}.manufacturer");
+        List<String> emailName = response.extract().path("findAll{it.name == 'Lal Dwivedi'}.email");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The manufacturer of products whose name Start = Ene are: " + menuList);
+        System.out.println("The value of limit is : " + emailName );
         System.out.println("------------------End of Test---------------------------");
     }
 
-    // 11) Get the price of products whose name end with = Vehicles
+    //11. Get gender of id = 5914189
     @Test
     public void test011() {
-        List<?> priceList = response.extract().path("data.findAll{it.name.endsWith('Black')}.price");
-        System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The prices of products whose name end with = Vehicles are: " + priceList);
-        System.out.println("------------------End of Test---------------------------");
-    }
-
-    // 12) Get the id of product whose name is 'Energizer - N Cell E90 Batteries (2-Pack)'
-    @Test
-    public void test012() {
-        List<Integer> productListMap = response.extract().path("data.findAll{it.name == 'Energizer - N Cell E90 Batteries (2-Pack)'}.id");
+        List<String> genderId = response.extract().path("findAll{it.id == '5914189'}.gender");
 
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The id of product whose name 'Energizer - N Cell E90 Batteries (2-Pack)' is : " +productListMap.get(0));
+        System.out.println("The value of limit is : " + genderId );
         System.out.println("------------------End of Test---------------------------");
     }
-
 }

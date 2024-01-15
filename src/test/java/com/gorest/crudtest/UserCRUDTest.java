@@ -1,103 +1,66 @@
 package com.gorest.crudtest;
 
 
+import com.gorest.model.UserPojo;
 import com.gorest.testbase.TestBase;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.Test;
-import com.gorest.utils.TestUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
+import static com.gorest.utils.TestUtils.getRandomValue;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasValue;
 
 
 public class UserCRUDTest extends TestBase {
-    static String firstName = TestUtils.getRandomValue() + "PrimeUser";
-    static String lastName = TestUtils.getRandomValue() + "PrimeUser";
-    static String programme = "Api Testing";
-    static String email = TestUtils.getRandomValue() + "xyz@gmail.com";
-    static int studentId;
-
-
 
 
     @Test
-    public void verifyUserCreatedSuccessfully() {}
-
-    @Test
-    public void verifyUserUpdateSuccessfully() {}
-
-    @Test
-    public void VerifyUserDeleteSuccessfully() {}
-
-
-
-
-
-    @Test
-    public void test001() {
-        List<String> courseList = new ArrayList<>();
-        courseList.add("Java");
-        courseList.add("Rest Assured");
-
-        Pojo Pojo = new Pojo();
-        Pojo.setFirstName(firstName);
-        Pojo.setLastName(lastName);
-        Pojo.setEmail(email);
-        Pojo.setProgramme(programme);
-        Pojo.setCourses(courseList);
-
+    public void averifyUserCreatedSuccessfully() {
+        UserPojo userPojo = new UserPojo();
+        userPojo.setName(getRandomValue() + "Avi");
+        userPojo.setEmail(getRandomValue() + "@gmail.com");
+        userPojo.setGender("male");
+        userPojo.setStatus("active");
         Response response = given()
-                .contentType(ContentType.JSON)
+                .header("Authorization", "Bearer 600f4364266ef9256401822c412cbfa2a4fe3c13c5c708bf2206cbb120f2a4c9")
+                .header("Content-Type", "application/json")
                 .when()
-                .body(Pojo)
-                .post();
+                .body(userPojo)
+                .post("/users");
         response.prettyPrint();
         response.then().statusCode(201);
 
     }
 
     @Test
-    public void test002() {
-        String s1 = "findAll{it.firstName == '";
-        String s2 = "'}.get(0)";
-
-        ValidatableResponse response =
-         given()
+    public void cverifyUserUpdateSuccessfully() {
+        UserPojo userPojo = new UserPojo();
+        userPojo.setName("Avi");
+        userPojo.setEmail(getRandomValue() + "@gmail.com");
+        userPojo.setGender("male");
+        userPojo.setStatus("active");
+        Response response = given()
+                .header("Authorization", "Bearer 600f4364266ef9256401822c412cbfa2a4fe3c13c5c708bf2206cbb120f2a4c9")
+                .header("Content-Type", "application/json")
                 .when()
-                .get("/list")
-                .then().statusCode(200);
-        HashMap<String, Object> studentMap = response.extract()
-                .path(s1 + firstName + s2);
-        response.body(s1 + firstName + s2, hasValue(firstName));
-        studentId = (int) studentMap.get("id");
+                .body(userPojo)
+                .put("/users/5968665");
+        response.prettyPrint();
+        response.then().statusCode(200);
+
     }
 
     @Test
-    public void test003() {
+    public void zVerifyUserDeleteSuccessfully() {
+
+        Response response = given()
+                .header("Authorization", "Bearer 600f4364266ef9256401822c412cbfa2a4fe3c13c5c708bf2206cbb120f2a4c9")
+                .header("Connection", "keep-alive")
+                .when()
+                .delete("/users/5968665");
+        response.prettyPrint();
+        response.then().statusCode(204);
 
     }
 
-    @Test
-    public void test004() {
-        given()
-                .pathParam("id", studentId)
-                .when()
-                .delete("/{id}")
-                .then()
-                .statusCode(204);
-
-        given()
-                .pathParam("id",studentId)
-                .when()
-                .get("/{id}")
-                .then()
-                .statusCode(404);
-    }
 
 }

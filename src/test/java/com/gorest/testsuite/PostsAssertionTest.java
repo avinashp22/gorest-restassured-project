@@ -1,10 +1,8 @@
 package com.gorest.testsuite;
-
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
@@ -29,59 +27,31 @@ public class PostsAssertionTest {
 //4. Check the multiple ids in the ArrayList (5914243, 5914202, 5914199)
 //5. Verify the body of userid = 5914197 is equal “Desidero vorax adsum. Non confero clarus. Velut defessus acceptus. Alioqui dignissimos alter. Tracto vel sordeo. Vulpes curso tollo. Villa ususvos. Terreo vos curtus. Condico correptius praesentium. Curatio deripio attero. Tempus creptiotumultus. Adhuc consequatur undique. Adaugeo terminatio antiquus. Stultus ex temptatio. Autusacerbitas civitas. Comptus terminatio tertius. Utpote fugit voluptas. Sequi adulescens caecus.”
 
-
-    // 1) Verify that the products of limit is equal to 10
+    //1. Verify the if the total record is 25
     @Test
     public void test001() {
-        response.body("limit", equalTo(10));
+        response.body("size", equalTo(25));
     }
 
-    // 2) Verify that the products of total is = 51957
+    //2. Verify the if the title of id =  93997 is equal to ”Demitto conqueror atavus argumentum corrupticohaero libero.”
     @Test
-    public void test002() {
-        //Homework
+    public void test002(){
+        response.body("find{it.id = 93997}.title", equalTo("Demitto conqueror atavus argumentum corrupticohaero libero"));
     }
-
-    // 3) Check the Name 'Duracell - AA Batteries (8-Pack)' is available in List of product's name
+    //3. Check the single user_id in the Array list (5914249)
     @Test
-    public void test003() {
-        response.body("data.name", hasItem("Duracell - AA Batteries (8-Pack)"));
+    public void test003(){
+        response.body("id", hasItem(5914249));
     }
-
-    // 4) Check Multiple Names (Energizer - MAX Batteries AA (4-Pack), Duracell - 9V Batteries (2-Pack)) are available in list of product's name
+    //4. Check the multiple ids in the ArrayList (5914243,5914202,5914199)
     @Test
-    public void test004() {
-        //Homework
+    public void test004(){
+        response.body("id", hasItems(5914243, 5914202, 5914199));
     }
-
-    // 5) Verify the 'name' field inside first categories map for the first data (Checking Values inside Map using hasKey(entityType))
+    //5. Verify the body of userid = 5914197 is equal “Desidero vorax adsum. Non confero clarus. Velut defessus acceptus. Alioqui dignissimos alter. Tracto vel sordeo. Vulpes curso tollo. Villa ususvos. Terreo vos curtus. Condico correptius praesentium. Curatio deripio attero. Tempus creptiotumultus. Adhuc consequatur undique. Adaugeo terminatio antiquus. Stultus ex temptatio. Autusacerbitas civitas. Comptus terminatio tertius. Utpote fugit voluptas. Sequi adulescens caecus.”
     @Test
-    public void test005() {
-        response.body("data[0].categories[0]", hasKey("name"));
-
+    public void test005(){
+        response.body("find{it.user_id == 5914197 }.body", equalTo("Desidero vorax adsum. Non confero clarus. Velut defessus acceptus. Alioqui dignissimos alter. Tracto vel sordeo. Vulpes curso tollo. Villa ususvos. Terreo vos curtus. Condico correptius praesentium. Curatio deripio attero. Tempus creptiotumultus. Adhuc consequatur undique. Adaugeo terminatio antiquus. Stultus ex temptatio. Autusacerbitas civitas. Comptus terminatio tertius. Utpote fugit voluptas. Sequi adulescens caecus."));
     }
 
-    // 6) Check entry 'manufacturer = Energizer' is inside map of product name is 'Energizer - N Cell E90 Batteries (2-Pack)'
-    @Test
-    public void test006() {
-        response.body("data.findAll{it.name == 'Energizer - N Cell E90 Batteries (2-Pack)'}", hasItem(hasEntry("manufacturer", "Energizer")));
-
-    }
-
-    // 7) Checking multiple values in the same statement
-    @Test
-    public void test007() {
-        response.body("limit", equalTo(10))
-                .body("data.name", hasItem("Duracell - AA Batteries (8-Pack)"))
-                .body("data[0].categories[0]", hasKey("name"));
-    }
-
-    // 8) Logical Assertions
-    @Test
-    public void test008() {
-        response.body("limit",equalTo(10))
-                .body("limit", lessThan(11))
-                .body("limit", greaterThan(9))
-                .body("limit", greaterThanOrEqualTo(10));
-    }
 }
