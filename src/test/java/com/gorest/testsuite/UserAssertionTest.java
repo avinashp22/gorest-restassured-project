@@ -1,8 +1,13 @@
 package com.gorest.testsuite;
+
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
@@ -34,7 +39,12 @@ public class UserAssertionTest {
     //1.Verify the if the total record is 20
     @Test
     public void test001() {
-        response.body("size", equalTo(20));
+        response = given()
+                .when()
+                .get("/users?page=1&per_page=20")
+                .then().statusCode(200);
+        List<Integer> total = response.extract().path("id");
+        Assert.assertEquals(total.size(), 20);
     }
     //2. Verify the if the name of id = 5914143 is equal to ”Himadri Banerjee”
     @Test

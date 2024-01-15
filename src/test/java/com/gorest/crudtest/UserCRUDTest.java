@@ -37,7 +37,7 @@ public class UserCRUDTest extends TestBase {
     }
 
     @Test
-    public void cverifyUserUpdateSuccessfully() {
+    public void dverifyUserUpdateSuccessfully() {
         UserPojo userPojo = new UserPojo();
         userPojo.setName(name);
         userPojo.setEmail(email);
@@ -48,7 +48,7 @@ public class UserCRUDTest extends TestBase {
                 .header("Content-Type", "application/json")
                 .when()
                 .body(userPojo)
-                .put("/users/5968768");
+                .put("/users/5968838");
         response.prettyPrint();
         response.then().statusCode(200);
 
@@ -61,7 +61,7 @@ public class UserCRUDTest extends TestBase {
                 .header("Authorization", "Bearer 600f4364266ef9256401822c412cbfa2a4fe3c13c5c708bf2206cbb120f2a4c9")
                 .header("Connection", "keep-alive")
                 .when()
-                .delete("/users/5968768");
+                .delete("/users/5968838");
         response.prettyPrint();
         response.then().statusCode(204);
 

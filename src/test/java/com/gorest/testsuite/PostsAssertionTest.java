@@ -1,8 +1,13 @@
 package com.gorest.testsuite;
+
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
@@ -30,7 +35,12 @@ public class PostsAssertionTest {
     //1. Verify the if the total record is 25
     @Test
     public void test001() {
-        response.body("size", equalTo(25));
+        response = given()
+                .when()
+                .get("/users?page=1&per_page=25")
+                .then().statusCode(200);
+        List<Integer> total = response.extract().path("id");
+        Assert.assertEquals(total.size(), 25);
     }
 
     //2. Verify the if the title of id =  93997 is equal to ”Demitto conqueror atavus argumentum corrupti cohaero libero.”
