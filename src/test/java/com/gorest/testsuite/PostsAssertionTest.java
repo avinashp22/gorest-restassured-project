@@ -33,25 +33,25 @@ public class PostsAssertionTest {
         response.body("size", equalTo(25));
     }
 
-    //2. Verify the if the title of id =  93997 is equal to ”Demitto conqueror atavus argumentum corrupticohaero libero.”
+    //2. Verify the if the title of id =  93997 is equal to ”Demitto conqueror atavus argumentum corrupti cohaero libero.”
     @Test
     public void test002(){
-        response.body("find{it.id = 93997}.title", equalTo("Demitto conqueror atavus argumentum corrupticohaero libero"));
+        response.body("[2].title", equalTo("Demitto conqueror atavus argumentum corrupti cohaero libero."));
     }
     //3. Check the single user_id in the Array list (5914249)
     @Test
     public void test003(){
-        response.body("id", hasItem(5914249));
+        response.body("user_id", hasItem(5914249));
     }
-    //4. Check the multiple ids in the ArrayList (5914243,5914202,5914199)
+    //4. Check the multiple ids in the ArrayList (5914243, 5914206, 5914193)
     @Test
     public void test004(){
-        response.body("id", hasItems(5914243, 5914202, 5914199));
+        response.body("user_id", hasItems(5914243, 5914206, 5914193));
     }
-    //5. Verify the body of userid = 5914197 is equal “Desidero vorax adsum. Non confero clarus. Velut defessus acceptus. Alioqui dignissimos alter. Tracto vel sordeo. Vulpes curso tollo. Villa ususvos. Terreo vos curtus. Condico correptius praesentium. Curatio deripio attero. Tempus creptiotumultus. Adhuc consequatur undique. Adaugeo terminatio antiquus. Stultus ex temptatio. Autusacerbitas civitas. Comptus terminatio tertius. Utpote fugit voluptas. Sequi adulescens caecus.”
+    //5. Verify the body of userid = 5914184 is equal “Cinis non solum. Decretum auctus artificiose. Bos umerus totam. Sed cicuta debitis. Crur unde tum. Et tabella dignissimos. Cognomen vito bardus. Deduco ara una. Desparatus amet caste. Quis taedium sollers.”
     @Test
     public void test005(){
-        response.body("find{it.user_id == 5914197 }.body", equalTo("Desidero vorax adsum. Non confero clarus. Velut defessus acceptus. Alioqui dignissimos alter. Tracto vel sordeo. Vulpes curso tollo. Villa ususvos. Terreo vos curtus. Condico correptius praesentium. Curatio deripio attero. Tempus creptiotumultus. Adhuc consequatur undique. Adaugeo terminatio antiquus. Stultus ex temptatio. Autusacerbitas civitas. Comptus terminatio tertius. Utpote fugit voluptas. Sequi adulescens caecus."));
+        response.body("find{it.user_id == 5914184 }.body", equalTo("Cinis non solum. Decretum auctus artificiose. Bos umerus totam. Sed cicuta debitis. Crur unde tum. Et tabella dignissimos. Cognomen vito bardus. Deduco ara una. Desparatus amet caste. Quis taedium sollers."));
     }
 
 }
