@@ -42,6 +42,7 @@ public class UserAssertionTest {
 
         List<Integer> total = response.extract().path("id");
         Assert.assertEquals(total.size(), 20);
+
     }
     //2. Verify the if the name of id = 5914143 is equal to ”Himadri Banerjee”
     @Test
