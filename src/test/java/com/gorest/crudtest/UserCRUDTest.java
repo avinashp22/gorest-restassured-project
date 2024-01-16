@@ -34,10 +34,26 @@ public class UserCRUDTest extends TestBase {
         response.prettyPrint();
         response.then().statusCode(201);
 
+        userId = response.then().extract().path("id");
+        System.out.println("User ID is: " + userId);
+
     }
 
     @Test
-    public void dverifyUserUpdateSuccessfully() {
+    public void cverifyUserReadSuccessfully() {
+        Response response = given()
+                .header("Authorization", "Bearer 600f4364266ef9256401822c412cbfa2a4fe3c13c5c708bf2206cbb120f2a4c9")
+                .header("Content-Type", "application/json")
+                .when()
+                .get("/users/" + userId);
+        response.prettyPrint();
+        response.then().statusCode(200);
+    }
+
+
+
+    @Test
+    public void fverifyUserUpdateSuccessfully() {
         UserPojo userPojo = new UserPojo();
         userPojo.setName(name);
         userPojo.setEmail(email);
@@ -48,7 +64,7 @@ public class UserCRUDTest extends TestBase {
                 .header("Content-Type", "application/json")
                 .when()
                 .body(userPojo)
-                .put("/users/5968838");
+                .put("/users/"+userId);
         response.prettyPrint();
         response.then().statusCode(200);
 
@@ -61,7 +77,7 @@ public class UserCRUDTest extends TestBase {
                 .header("Authorization", "Bearer 600f4364266ef9256401822c412cbfa2a4fe3c13c5c708bf2206cbb120f2a4c9")
                 .header("Connection", "keep-alive")
                 .when()
-                .delete("/users/5968838");
+                .delete("/users/"+userId);
         response.prettyPrint();
         response.then().statusCode(204);
 
