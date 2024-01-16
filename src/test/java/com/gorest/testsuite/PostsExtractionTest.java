@@ -10,7 +10,6 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-
 public class PostsExtractionTest {
 
     static ValidatableResponse response;
@@ -33,7 +32,6 @@ public class PostsExtractionTest {
 //6. Extract the title of all records whose user_id = 5914200
 //7. Extract the body of all records whose id = 93957
 
-
     //1. Extract the title
     @Test
     public void test001() {
@@ -50,7 +48,6 @@ public class PostsExtractionTest {
         System.out.println("------------------Test start---------------------------");
         System.out.println("Total number of records are :" + size);
         System.out.println("------------------End of Test---------------------------");
-
     }
 
     //3. Extract the body of 15th record
@@ -60,8 +57,8 @@ public class PostsExtractionTest {
         System.out.println("------------------Test start---------------------------");
         System.out.println("The body of 15th record: " + body);
         System.out.println("------------------End of Test---------------------------");
-
     }
+
     //4. Extract the user_id of all the records
     @Test
     public void test004() {
@@ -69,8 +66,8 @@ public class PostsExtractionTest {
         System.out.println("------------------Title---------------------------");
         System.out.println("The user_id of all the records : " + usersId);
         System.out.println("------------------End of Test---------------------------");
-
     }
+
     //5. Extract the title of all the records
     @Test
     public void test005() {
@@ -78,8 +75,8 @@ public class PostsExtractionTest {
         System.out.println("------------------Title---------------------------");
         System.out.println("The title of all the records :" + allTitle);
         System.out.println("------------------End of Test---------------------------");
-
     }
+
     //6. Extract the title of all records whose user_id = 5914200
     @Test
     public void test006() {
@@ -89,6 +86,7 @@ public class PostsExtractionTest {
         System.out.println("the title of all records whose user_id = 5914200" + userTitle);
         System.out.println("------------------End of Test---------------------------");
     }
+
     //7. Extract the body of all records whose id = 93957
     @Test
     public void test007() {

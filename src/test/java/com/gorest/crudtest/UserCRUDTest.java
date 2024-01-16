@@ -1,14 +1,11 @@
 package com.gorest.crudtest;
 
-
 import com.gorest.model.UserPojo;
 import com.gorest.testbase.TestBase;
 import com.gorest.utils.TestUtils;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-
 import static io.restassured.RestAssured.given;
-
 
 public class UserCRUDTest extends TestBase {
     static int userId;
@@ -18,7 +15,7 @@ public class UserCRUDTest extends TestBase {
     static String status = "active";
 
     @Test
-    public void averifyUserCreatedSuccessfully() {
+    public void T1verifyUserCreatedSuccessfully() {
         UserPojo userPojo = new UserPojo();
         userPojo.setName(name);
         userPojo.setEmail(email);
@@ -36,11 +33,10 @@ public class UserCRUDTest extends TestBase {
 
         userId = response.then().extract().path("id");
         System.out.println("User ID is: " + userId);
-
     }
 
     @Test
-    public void cverifyUserReadSuccessfully() {
+    public void T2verifyUserReadSuccessfully() {
         Response response = given()
                 .header("Authorization", "Bearer 600f4364266ef9256401822c412cbfa2a4fe3c13c5c708bf2206cbb120f2a4c9")
                 .header("Content-Type", "application/json")
@@ -50,10 +46,8 @@ public class UserCRUDTest extends TestBase {
         response.then().statusCode(200);
     }
 
-
-
     @Test
-    public void fverifyUserUpdateSuccessfully() {
+    public void T3verifyUserUpdateSuccessfully() {
         UserPojo userPojo = new UserPojo();
         userPojo.setName(name);
         userPojo.setEmail(email);
@@ -67,12 +61,10 @@ public class UserCRUDTest extends TestBase {
                 .put("/users/"+userId);
         response.prettyPrint();
         response.then().statusCode(200);
-
     }
 
     @Test
-    public void zVerifyUserDeleteSuccessfully() {
-
+    public void T4VerifyUserDeleteSuccessfully() {
         Response response = given()
                 .header("Authorization", "Bearer 600f4364266ef9256401822c412cbfa2a4fe3c13c5c708bf2206cbb120f2a4c9")
                 .header("Connection", "keep-alive")
@@ -80,8 +72,5 @@ public class UserCRUDTest extends TestBase {
                 .delete("/users/"+userId);
         response.prettyPrint();
         response.then().statusCode(204);
-
     }
-
-
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-
 public class UserExtractionTest {
 
     static ValidatableResponse response;
@@ -24,7 +23,6 @@ public class UserExtractionTest {
                 .then().statusCode(200);
     }
 
-
 //1. Extract the All Ids
 //2. Extract the all Names
 //3. Extract the name of 5th object
@@ -37,14 +35,12 @@ public class UserExtractionTest {
 //10. Get email of the object where name = Lal Dwivedi
 //11. Get gender of id = 5914189
 
-
     //1. Extract the All Ids
     @Test
     public void test001() {
         List<Integer> userIds = response.extract().path("id");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + userIds );
+        System.out.println("The value of limit is : " + userIds);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -52,9 +48,8 @@ public class UserExtractionTest {
     @Test
     public void test002() {
         List<String> allName = response.extract().path("name");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + allName );
+        System.out.println("The value of limit is : " + allName);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -62,9 +57,8 @@ public class UserExtractionTest {
     @Test
     public void test003() {
         String name = response.extract().path("[4].name");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + name );
+        System.out.println("The value of limit is : " + name);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -72,9 +66,8 @@ public class UserExtractionTest {
     @Test
     public void test004() {
         List<String> status = response.extract().path("findAll{it.status == 'inactive'}.name");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + status );
+        System.out.println("The value of limit is : " + status);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -82,9 +75,8 @@ public class UserExtractionTest {
     @Test
     public void test005() {
         List<String> activeGender = response.extract().path("findAll{it.status == 'active'}.gender");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + activeGender );
+        System.out.println("The value of limit is : " + activeGender);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -92,9 +84,8 @@ public class UserExtractionTest {
     @Test
     public void test006() {
         List<String> femaleGender = response.extract().path("findAll{it.gender == 'female'}.name");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + femaleGender );
+        System.out.println("The value of limit is : " + femaleGender);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -102,9 +93,8 @@ public class UserExtractionTest {
     @Test
     public void test007() {
         List<String> email = response.extract().path("findAll{it.status == 'inactive'}.email");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + email );
+        System.out.println("The value of limit is : " + email);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -112,9 +102,8 @@ public class UserExtractionTest {
     @Test
     public void test008() {
         List<String> ids = response.extract().path("findAll{it.gender == 'male'}.id");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + ids );
+        System.out.println("The value of limit is : " + ids);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -122,9 +111,8 @@ public class UserExtractionTest {
     @Test
     public void test009() {
         List<String> status = response.extract().path("status");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + status );
+        System.out.println("The value of limit is : " + status);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -132,9 +120,8 @@ public class UserExtractionTest {
     @Test
     public void test010() {
         List<String> emailName = response.extract().path("findAll{it.name == 'Lal Dwivedi'}.email");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + emailName );
+        System.out.println("The value of limit is : " + emailName);
         System.out.println("------------------End of Test---------------------------");
     }
 
@@ -142,9 +129,8 @@ public class UserExtractionTest {
     @Test
     public void test011() {
         List<String> genderId = response.extract().path("findAll{it.id == '5914189'}.gender");
-
         System.out.println("------------------StartingTest---------------------------");
-        System.out.println("The value of limit is : " + genderId );
+        System.out.println("The value of limit is : " + genderId);
         System.out.println("------------------End of Test---------------------------");
     }
 }
